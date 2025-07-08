@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Strapi G26</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Test de Conexión Strapi - Content Type G26</h1>
+    
+    <div id="status">Verificando conexión...</div>
+    
+    <button onclick="testConnection()">Probar Conexión</button>
+    <button onclick="testCreate()">Probar Crear Registro</button>
+    <button onclick="testRead()">Probar Leer Registros</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const STRAPI_URL = 'https://gestionweb.frlp.utn.edu.ar';
+        const API_PATH = '/api/g26s';
+
+        async function testConnection() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="test-result warning">Probando conexión...</div>';
+
+            try {
+                const response = await fetch(`${STRAPI_URL}${API_PATH}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">
+                            ✅ Conexión exitosa!<br>
+                            Status: ${response.status}<br>
+                            Registros encontrados: ${data.data ? data.data.length : 0}
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ Error de conexión<br>
+                            Status: ${response.status}<br>
+                            Error: ${response.statusText}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Error de red: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function testCreate() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="test-result warning">Probando crear registro...</div>';
+
+            const testData = {
+                data: {
+                    name: "Test Director",
+                    tmdb_id: 999999,
+                    grupo: "Grupo 26",
+                    movies: [
+                        {
+                            title: "Test Movie",
+                            vote_average: 8.5,
+                            release_date: "2024-01-01"
+                        }
+                    ],
+                    created_at: new Date().toISOString()
+                }
+            };
+
+            try {
+                const response = await fetch(`${STRAPI_URL}${API_PATH}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">
+                            ✅ Registro creado exitosamente!<br>
+                            ID: ${data.data.id}<br>
+                            Nombre: ${data.data.attributes.name}
+                        </div>
+                    `;
+                } else {
+                    const errorText = await response.text();
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ Error creando registro<br>
+                            Status: ${response.status}<br>
+                            Error: ${errorText}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Error de red: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function testRead() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="test-result warning">Leyendo registros...</div>';
+
+            try {
+                const response = await fetch(`${STRAPI_URL}${API_PATH}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    let html = `<div class="test-result success">✅ Registros leídos exitosamente!<br>Total: ${data.data.length}<br><br>`;
+                    
+                    data.data.forEach((item, index) => {
+                        html += `${index + 1}. ${item.attributes.name || 'Sin nombre'} (ID: ${item.id})<br>`;
+                    });
+                    
+                    html += '</div>';
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ Error leyendo registros<br>
+                            Status: ${response.status}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Error de red: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Test automático al cargar la página
+        window.onload = function() {
+            testConnection();
+        };
+    </script>
+</body>
+</html>

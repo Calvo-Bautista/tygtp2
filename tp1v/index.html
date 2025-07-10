@@ -28,12 +28,6 @@
                 <div class="sidebar-section">
                     <h3>Visualizar datos</h3>
                     <button id="visualizeBtn" class="btn btn-secondary">Mostrar Películas Guardadas</button>
-                    <div class="form-group">
-                        <label for="savedDirectors">Directores guardados:</label>
-                        <select id="savedDirectors">
-                            <option value="">Seleccionar director...</option>
-                        </select>
-                    </div>
                 </div>
             </aside>
             
@@ -43,18 +37,16 @@
                     <p>Ingresa el nombre de un director para encontrar sus 5 películas mejor valoradas.</p>
                     <p>Los datos se guardarán en Strapi y podrás visualizarlos posteriormente.</p>
                 </div>
-                
+                <div id="errorMessage" class="error-message hidden"></div>
                 <div id="resultsContainer" class="results-container hidden">
                     <h2 id="resultsTitle">Resultados</h2>
+                    <div id="directorsList" class="directors-list"></div>
                     <div id="moviesList" class="movies-list"></div>
                 </div>
                 
-                <div id="chartContainer" class="chart-container hidden">
-                    <h3>Valoraciones de las Películas</h3>
-                    <canvas id="ratingsChart" width="600" height="300"></canvas>
-                </div>
+
                 
-                <div id="errorMessage" class="error-message hidden"></div>
+                
             </main>
         </div>
         
@@ -63,6 +55,6 @@
         </footer>
     </div>
     
-    <script src="script.js"></script>
+    <script src="scriptviejo.js"></script>
 </body>
 </html>

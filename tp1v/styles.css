@@ -236,6 +236,28 @@ body {
   color: #555;
 }
 
+.directors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.director-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  border-left: 4px solid #6a9c9c;
+  min-width: 180px;
+}
+
+.director-card h4 {
+  margin: 0 0 5px 0;
+  color: #2c5555;
+  font-size: 16px;
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;

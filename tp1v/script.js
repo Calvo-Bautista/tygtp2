@@ -38,7 +38,7 @@ async function saveToStrapi(director, movies) {
     // 3. Crear películas relacionadas
     for (const movie of movies) {
       const peliculaData = {
-        data: {
+      data: {
           Nombre: movie.title,
           Valoracion: movie.vote_average,
           Descripcion: movie.overview || "Sin descripción",

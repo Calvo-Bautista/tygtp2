@@ -237,10 +237,7 @@ async function visualizeData() {
             vote_average: pel.valoracion,
             overview: pel.descripcion,
             release_date: pel.anio ? pel.anio.toString() : '',
-            director: (() => {
-              console.log('Director data:', pel.g_26_director);
-              return pel.g_26_director?.data?.attributes?.nombre + ' ' + pel.g_26_director?.data?.attributes?.apellido || 'Director no disponible';
-            })(),
+            director: pel.g_26_director?.nombre + ' ' + pel.g_26_director?.apellido || 'Director no disponible',
             peliculaID: pel.peliculaID,
           };
         });

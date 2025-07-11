@@ -42,15 +42,14 @@ body {
 
 .sidebar {
   width: 250px;
-  background-color: #b8d4d4;
+  background-color: #bd2409;
   padding: 20px;
-  border-right: 2px solid #888;
 }
 
 .sidebar-section {
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #9ac4c4;
+  border-bottom: 1px solid #000000;
 }
 
 .sidebar-section:last-child {
@@ -60,7 +59,7 @@ body {
 .sidebar-section h3 {
   font-size: 14px;
   margin-bottom: 15px;
-  color: #2c5555;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -72,14 +71,14 @@ body {
   display: block;
   margin-bottom: 5px;
   font-size: 12px;
-  color: #2c5555;
+  color: #000000;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #888;
+  border: 1px solid #000000;
   border-radius: 3px;
   font-size: 12px;
 }
@@ -96,26 +95,26 @@ body {
 }
 
 .btn-primary {
-  background-color: #4a7c7c;
+  background-color: #000000;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #3a6666;
+  background-color: #3a3a3a;
 }
 
 .btn-secondary {
-  background-color: #6a9c9c;
+  background-color: #000000;
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #5a8c8c;
+  background-color: #3a3a3a;
 }
 
 .content-area {
   flex: 1;
-  background-color: #d4e4f0;
+  background-color: #ffffff;
   padding: 30px;
   overflow-y: auto;
 }
@@ -126,12 +125,12 @@ body {
 }
 
 .welcome h2 {
-  color: #2c5555;
+  color: #000000;
   margin-bottom: 20px;
 }
 
 .welcome p {
-  color: #4a7c7c;
+  color: #000000;
   margin-bottom: 10px;
   line-height: 1.5;
 }
@@ -141,9 +140,9 @@ body {
 }
 
 .results-container h2 {
-  color: #2c5555;
+  color: #000000;
   margin-bottom: 20px;
-  border-bottom: 2px solid #4a7c7c;
+  border-bottom: 2px solid #000000;
   padding-bottom: 10px;
 }
 
@@ -157,11 +156,11 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #4a7c7c;
+  border-left: 4px solid #000000;
 }
 
 .movie-card h3 {
-  color: #2c5555;
+  color: #000000;
   margin-bottom: 10px;
   font-size: 18px;
 }
@@ -175,16 +174,16 @@ body {
 
 .movie-info span {
   font-size: 14px;
-  color: #666;
+  color: #000000;
 }
 
 .movie-info .rating {
   font-weight: bold;
-  color: #4a7c7c;
+  color: #000000;
 }
 
 .movie-overview {
-  color: #555;
+  color: #000000;
   font-size: 14px;
   line-height: 1.4;
   margin-top: 10px;
@@ -228,7 +227,6 @@ body {
   background-color: #3a3a3a;
   padding: 10px 20px;
   text-align: right;
-  border-top: 2px solid #888;
 }
 
 .footer p {

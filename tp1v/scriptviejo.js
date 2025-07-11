@@ -221,21 +221,26 @@ async function visualizeData() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    const res = await fetch(`${strapiUrl}/api/g26-peliculas?populate=g_26_director`, { headers });
+    const res = await fetch(`${strapiUrl}/api/g26-peliculas?populate=g_26_director&pagination[pageSize]=100`, { headers });
     const data = await res.json();
     console.log('Películas recibidas de Strapi:', data.data);
     if (data.data && data.data.length > 0) {
       console.log("Estructura de cada item:", data.data);
+      // En visualizeData, asegúrate de que el mapeo de películas tenga las mismas propiedades que las que se pasan a displayResults en loadAndSaveData
       const peliculas = data.data
         .filter(item => item && (item.attributes || item.nombre)) // Permite ambos casos
         .map(item => {
-          // Intenta acceder por attributes, si no existe usa el objeto directo
+          //Intenta acceder por attributes, si no existe usa el objeto directo
           const pel = item.attributes || item;
           return {
             title: pel.nombre,
             vote_average: pel.valoracion,
             overview: pel.descripcion,
             release_date: pel.anio ? pel.anio.toString() : '',
+            director: (() => {
+              console.log('Director data:', pel.g_26_director);
+              return pel.g_26_director?.data?.attributes?.nombre + ' ' + pel.g_26_director?.data?.attributes?.apellido || 'Director no disponible';
+            })(),
             peliculaID: pel.peliculaID,
           };
         });
@@ -298,7 +303,7 @@ function displayResults(director, movies) {
     .map(
       (movie, index) => `
           <div class="movie-card">
-              <h3>${index + 1}. ${movie.title}</h3>
+              <h3>${index + 1}. ${movie.title} by ${movie.director}</h3>
               <div class="movie-info">
                   <span class="rating">⭐ ${movie.vote_average.toFixed(1)}/10</span>
                   <span>📅 ${movie.release_date ? new Date(movie.release_date).getFullYear() : "N/A"}</span>

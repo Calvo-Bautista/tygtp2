@@ -57,7 +57,11 @@ async function loadAndSaveData() {
     await saveToStrapi(director, topMovies)
 
     // 5. Mostrar resultados
-    displayResults(director, topMovies)
+    const topMoviesWithDirector = topMovies.map(movie => ({
+      ...movie,
+      director: director.name // o `${director.name} ${director.apellido}` si tienes ambos
+    }));
+    displayResults(director, topMoviesWithDirector)
 
   } catch (error) {
     console.error("Error:", error)
@@ -83,7 +87,7 @@ async function searchDirector(name) {
   }
 
   const data = await response.json()
-  console.log(data)
+  // console.log(data)
 
   // Buscar directores en los resultados
   const directors = data.results.filter(
@@ -289,8 +293,6 @@ function displayResults(director, movies) {
   const resultsContainer = document.getElementById("resultsContainer")
   const resultsTitle = document.getElementById("resultsTitle")
   const moviesList = document.getElementById("moviesList")
-  console.log("Películas a mostrar:", movies);
-
   welcomeMessage.classList.add("hidden")
   resultsContainer.classList.remove("hidden")
 
